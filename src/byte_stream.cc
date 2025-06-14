@@ -6,9 +6,9 @@ ByteStream::ByteStream( uint64_t capacity ) : capacity_( capacity ) {}
 
 void Writer::push( string data )
 {
-  auto pushed = min(data.size(), available_capacity());
+  auto pushed = min( data.size(), available_capacity() );
   sum_bytes_pushed += pushed;
-  buffer_.append(data.substr(0, pushed));
+  buffer_.append( data.substr( 0, pushed ) );
 }
 
 void Writer::close()
@@ -33,14 +33,14 @@ uint64_t Writer::bytes_pushed() const
 
 string_view Reader::peek() const
 {
-  return string_view(buffer_.data(), buffer_.size());
+  return string_view( buffer_.data(), buffer_.size() );
 }
 
 void Reader::pop( uint64_t len )
 {
-  auto poped = min(len, buffer_.size());
+  auto poped = min( len, buffer_.size() );
   sum_bytes_poped += poped;
-  buffer_.erase(0, poped);
+  buffer_.erase( 0, poped );
 }
 
 bool Reader::is_finished() const
@@ -57,4 +57,3 @@ uint64_t Reader::bytes_popped() const
 {
   return sum_bytes_poped;
 }
-
